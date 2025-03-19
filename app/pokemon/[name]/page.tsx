@@ -7,6 +7,8 @@ import { PageProps } from "@/types";
 import { AlertCircle, ChevronLeft } from "lucide-react";
 import Link from "next/link";
 
+export const dynamic = "force-static";
+
 export default async function PokemonPage({
   params,
 }: PageProps<{ name: string }>) {
