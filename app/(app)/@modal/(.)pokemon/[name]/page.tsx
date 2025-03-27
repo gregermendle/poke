@@ -1,14 +1,15 @@
+"use cache";
+
 import Details from "@/app/_components/details";
 import { DialogCapture } from "@/app/_components/dialog";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import getParam from "@/lib/get-param";
+import { AlertCircle } from "@/components/ui/icons";
 import { PageProps } from "@/types";
-import { AlertCircle } from "lucide-react";
 
 export default async function PokemonIntercept({
   params,
 }: PageProps<{ name: string }>) {
-  const name = await getParam(params, "name");
+  const { name } = await params;
 
   return (
     <DialogCapture>

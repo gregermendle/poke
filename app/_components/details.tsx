@@ -1,5 +1,4 @@
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import {
@@ -7,10 +6,9 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Skeleton } from "@/components/ui/skeleton";
 import { getPokemonByName, getSpeciesByName } from "@/lib/poke";
-import { AlertCircle } from "lucide-react";
 import React from "react";
+import { AlertCircle } from "@/components/ui/icons";
 
 interface DetailsProps {
   name: string;
@@ -39,24 +37,26 @@ export default async function Details({ name }: DetailsProps) {
           </div>
           <DialogHeader>
             <div className="absolute -top-12 left-0 flex justify-center w-full pointer-events-none">
-              <Avatar className="w-26 h-26 border bg-background/10 backdrop-blur-sm">
-                <AvatarFallback className="uppercase">
-                  {response.data.name.substring(0, 2)}
-                </AvatarFallback>
-                {typeof response.data.sprites.front_default === "string" && (
-                  <AvatarImage
-                    asChild
+              <div className="relative flex shrink-0 overflow-hidden rounded-full w-26 h-26 border bg-background/10 backdrop-blur-sm">
+                {response?.type === "ok" &&
+                response.data.sprites.front_default ? (
+                  <Image
+                    className="aspect-square size-full"
                     src={response.data.sprites.front_default}
+                    alt={response.data.name}
+                    width={104}
+                    height={104}
+                  />
+                ) : (
+                  <div
+                    className="
+                      bg-muted flex size-full items-center justify-center rounded-full uppercase
+                    "
                   >
-                    <Image
-                      src={response.data.sprites.front_default}
-                      alt={response.data.name}
-                      width={104}
-                      height={104}
-                    />
-                  </AvatarImage>
+                    {name.substring(0, 2)}
+                  </div>
                 )}
-              </Avatar>
+              </div>
             </div>
             <DialogTitle className="capitalize pt-10">
               {response.data.name}

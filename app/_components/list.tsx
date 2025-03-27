@@ -1,9 +1,9 @@
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { AlertCircle } from "lucide-react";
 import { safePromise } from "@/lib/safe-promise";
 import { poke } from "@/lib/poke";
 import { Skeleton } from "@/components/ui/skeleton";
 import ListItem from "@/app/_components/list-item";
+import { AlertCircle } from "@/components/ui/icons";
 
 interface ListProps {
   search?: string;

@@ -1,18 +1,17 @@
+"use cache";
+
 import Details from "@/app/_components/details";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import getParam from "@/lib/get-param";
+import { AlertCircle, ChevronLeft } from "@/components/ui/icons";
 import { PageProps } from "@/types";
-import { AlertCircle, ChevronLeft } from "lucide-react";
 import Link from "next/link";
-
-export const dynamic = "force-static";
 
 export default async function PokemonPage({
   params,
 }: PageProps<{ name: string }>) {
-  const name = await getParam(params, "name");
+  const { name } = await params;
 
   return (
     <Dialog open>

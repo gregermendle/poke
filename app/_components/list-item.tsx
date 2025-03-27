@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Suspense, use, useEffect, useRef, useState } from "react";
 import { getPokemonByName } from "@/lib/poke";
 import { type Pokemon } from "pokedex-promise-v2";
@@ -44,11 +43,15 @@ export default function ListItem({ name }: ListItemProps) {
       >
         <Suspense
           fallback={
-            <Avatar>
-              <AvatarFallback className="uppercase">
+            <div className="relative flex size-8 shrink-0 overflow-hidden rounded-full">
+              <div
+                className="
+        bg-muted flex size-full items-center justify-center rounded-full
+      "
+              >
                 {name.substring(0, 2)}
-              </AvatarFallback>
-            </Avatar>
+              </div>
+            </div>
           }
         >
           <ListItemAvatar name={name} pokemonPromise={promise} />
@@ -67,25 +70,25 @@ export function ListItemAvatar({ name, pokemonPromise }: ListItemAvatarProps) {
   const response = pokemonPromise ? use(pokemonPromise) : null;
 
   return (
-    <Avatar>
-      <AvatarFallback className="uppercase">
-        {name.substring(0, 2)}
-      </AvatarFallback>
-      {response?.type === "ok" &&
-        typeof response.data.sprites.front_default === "string" && (
-          <AvatarImage
-            loading="lazy"
-            src={response.data.sprites.front_default}
-            asChild
-          >
-            <Image
-              src={response.data.sprites.front_default}
-              alt={response.data.name}
-              width={104}
-              height={104}
-            />
-          </AvatarImage>
-        )}
-    </Avatar>
+    <div className="relative flex size-8 shrink-0 overflow-hidden rounded-full">
+      {response?.type === "ok" && response.data.sprites.front_default ? (
+        <Image
+          className="aspect-square size-full"
+          src={response.data.sprites.front_default}
+          alt={response.data.name}
+          quality={1}
+          width={32}
+          height={32}
+        />
+      ) : (
+        <div
+          className="
+        bg-muted flex size-full items-center justify-center rounded-full
+      "
+        >
+          {name.substring(0, 2)}
+        </div>
+      )}
+    </div>
   );
 }
