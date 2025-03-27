@@ -135,29 +135,3 @@ export async function DetailDescription({ species }: DetailDescriptionProps) {
     </>
   );
 }
-
-export function DetailsSkeleton() {
-  return (
-    <>
-      <DialogHeader>
-        <DialogTitle className="sr-only">Loading...</DialogTitle>
-      </DialogHeader>
-      <div className="space-y-2">
-        <div className="absolute -top-12 left-1/2 -translate-x-1/2 rounded-full bg-background">
-          <Skeleton className="w-26 h-26 rounded-full" />
-        </div>
-        <div className="pt-10">
-          <Skeleton className="h-4 w-24" />
-        </div>
-        <div className="flex gap-1">
-          <Skeleton className="w-10 h-4" />
-          <Skeleton className="w-10 h-4" />
-        </div>
-      </div>
-      <div className="flex flex-col gap-2">
-        <Skeleton className="h-4" />
-        <Skeleton className="h-4 w-56" />
-      </div>
-    </>
-  );
-}
